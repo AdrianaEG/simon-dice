@@ -1,0 +1,31 @@
+.estructura {
+    display: flex;
+    width: 500px;
+    height: 300px;
+    border: solid;
+    border-color: red;
+}
+
+.cuadrado{
+    width: 200px;
+    height: 200px;
+    border: solid;
+    margin: 10px;
+}
+
+#primero {
+    border-color: pink;
+}
+
+#segundo{
+    border-color: blue;
+}
+
+#tercero{
+    border-color: green;
+}
+
+#cuarto{
+    border-color: yellow;
+}
+
