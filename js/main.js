@@ -32,7 +32,14 @@ function juegaMaquina() {
 
     console.log('el array con la secuencia maquina es ' + secuenciaMaquina);
     secuenciaUsuario = [];
-    desbloquearCuadradoUsuario();
+    
+    let retraso_turno_jugador = (secuenciaMaquina.length + 1) * 1000;
+    
+    setTimeout(function() {
+      desbloquearCuadradoUsuario();
+    }, RETRASO_TURNO_JUGADOR);
+    
+    //desbloquearCuadradoUsuario();
 
 }
 
