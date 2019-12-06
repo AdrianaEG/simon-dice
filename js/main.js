@@ -1,7 +1,7 @@
 const $botonComenzar = document.querySelector('#comenzar');
 let secuenciaUsuario = [];
 let secuenciaMaquina = [];
-let movimientos = 0;
+let clicksUsuario = 0;
 
 bloquearCuadradoUsuario();
 
@@ -19,7 +19,6 @@ $botonComenzar.onclick = function (event) {
 function juegaMaquina() {
     let aleatorio = obtenerNumeroAleatorio();
     let cuadradoResaltado = document.querySelector('#cuadrado-' + aleatorio);
-    //console.log(cuadradoResaltado.attributes.id.value);
     secuenciaMaquina.push(cuadradoResaltado.attributes.id.value);
 
     for (let i = 0; i < secuenciaMaquina.length; i++) {
@@ -32,15 +31,14 @@ function juegaMaquina() {
 
     console.log('el array con la secuencia maquina es ' + secuenciaMaquina);
     secuenciaUsuario = [];
-    
-    let retraso_turno_jugador = (secuenciaMaquina.length + 1) * 1000;
-    
-    setTimeout(function() {
-      desbloquearCuadradoUsuario();
-    }, RETRASO_TURNO_JUGADOR);
-    
-    //desbloquearCuadradoUsuario();
 
+    let retraso_turno_jugador = (secuenciaMaquina.length + 1) * 1000;
+
+    setTimeout(function () { //para que le de la opción de jugar al usuario una vez que la máquina ha terminado de jugar
+        desbloquearCuadradoUsuario();
+    }, retraso_turno_jugador);
+
+    clicksUsuario = 0;
 }
 
 
@@ -61,16 +59,38 @@ function juegaUsuario(e) {
     resaltar(cuadradoSeleccionUsuario);
     secuenciaUsuario.push(cuadradoSeleccionUsuario.attributes.id.value);
 
-    console.log('el arreglo con las selecciones del usuario ' + secuenciaUsuario);
-    
-
+    //console.log('el arreglo con las selecciones del usuario ' + secuenciaUsuario);
+    //console.log('el usuario ha hecho ' + clicksUsuario + ' clicks');
 
     if (secuenciaUsuario.length === secuenciaMaquina.length) {
-        bloquearCuadradoUsuario();//para que no me ocurra lo que está sucediendo (que mientras la máquina juega el usuario puede seguir haciendo click debo usar un setTimeOut, ver luego)
-        juegaMaquina();
+
+        if (comprobarSiPerdio(clicksUsuario)) {
+            perder();
+        } else {
+            bloquearCuadradoUsuario();
+            juegaMaquina();
+        }
     } else {
-        desbloquearCuadradoUsuario();
+
+        if (comprobarSiPerdio(clicksUsuario)) {
+            perder();
+        } else {
+            desbloquearCuadradoUsuario();
+            clicksUsuario++;
+        }
     }
+
+}
+
+function comprobarSiPerdio(clicksUsuario) {
+    if (secuenciaUsuario[clicksUsuario] !== secuenciaMaquina[clicksUsuario]) {
+        return true;
+    }
+}
+
+function perder() {
+    alert('PERDISTE PRESIONA COMENZAR PARA EMPEZAR DE NUEVO');
+    bloquearCuadradoUsuario();
 }
 
 function bloquearCuadradoUsuario() {
