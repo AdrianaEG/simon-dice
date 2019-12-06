@@ -1,7 +1,3 @@
-let primero = document.querySelector('#primero');
-let segundo = document.querySelector('#segundo');
-let tercero = document.querySelector('#tercero');
-let cuarto = document.querySelector('#cuarto');
 const $botonComenzar = document.querySelector('#comenzar');
 let secuenciaUsuario = [];
 let secuenciaMaquina = [];
@@ -19,3 +15,17 @@ $botonComenzar.onclick = function (event) {
     event.preventDefault();
 }
 
+
+function juegaMaquina() {
+    let aleatorio = obtenerNumeroAleatorio();
+    let cuadradoResaltado = document.querySelector('#cuadrado-' + aleatorio);
+    //console.log(cuadradoResaltado.attributes.id.value);
+    secuenciaMaquina.push(cuadradoResaltado.attributes.id.value);    
+    
+    for(let i=0; i<secuenciaMaquina.length; i++){
+        const RETRASO_MS = (i + 1) * 1000;
+      setTimeout(function() {
+          resaltar(document.querySelector('#' + secuenciaMaquina[i]));
+      }, RETRASO_MS);
+    }
+    
