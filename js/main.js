@@ -29,3 +29,55 @@ function juegaMaquina() {
       }, RETRASO_MS);
     }
     
+    
+    console.log('el array con la secuencia maquina es ' + secuenciaMaquina);
+    secuenciaUsuario = [];
+    desbloquearCuadradoUsuario();
+    
+}
+
+
+function obtenerNumeroAleatorio() {
+    return ((Math.floor(Math.random() * 4)) + 1);
+}
+
+function resaltar(cuadradoResaltado) {
+    cuadradoResaltado.style.opacity = 1;
+
+    setTimeout(function () {
+        cuadradoResaltado.style.opacity = 0.5;
+    }, 500);
+}
+
+function juegaUsuario(e) {
+    let cuadradoSeleccionUsuario = e.target;
+    resaltar(cuadradoSeleccionUsuario);
+    secuenciaUsuario.push(cuadradoSeleccionUsuario.attributes.id.value);
+   
+    console.log('el arreglo con las selecciones del usuario ' + secuenciaUsuario);
+    bloquearCuadradoUsuario();
+    
+    
+    if(secuenciaUsuario.length === secuenciaMaquina.length){
+        juegaMaquina();
+    }
+    else{
+        desbloquearCuadradoUsuario();
+    }
+}
+
+function bloquearCuadradoUsuario() {
+    document.querySelectorAll('.cuadrado').forEach(function ($cuadro) {
+        $cuadro.onclick = function () {};
+    });
+}
+
+function desbloquearCuadradoUsuario() {
+    document.querySelectorAll('.cuadrado').forEach(function ($cuadro) {
+        $cuadro.onclick = juegaUsuario;
+    });
+    
+}
+
+
+
