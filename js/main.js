@@ -11,7 +11,7 @@ $botonComenzar.onclick = function (event) {
     secuenciaMaquina = [];
 
     juegaMaquina();
-    
+
     event.preventDefault();
 }
 
@@ -20,20 +20,20 @@ function juegaMaquina() {
     let aleatorio = obtenerNumeroAleatorio();
     let cuadradoResaltado = document.querySelector('#cuadrado-' + aleatorio);
     //console.log(cuadradoResaltado.attributes.id.value);
-    secuenciaMaquina.push(cuadradoResaltado.attributes.id.value);    
-    
-    for(let i=0; i<secuenciaMaquina.length; i++){
+    secuenciaMaquina.push(cuadradoResaltado.attributes.id.value);
+
+    for (let i = 0; i < secuenciaMaquina.length; i++) {
         const RETRASO_MS = (i + 1) * 1000;
-      setTimeout(function() {
-          resaltar(document.querySelector('#' + secuenciaMaquina[i]));
-      }, RETRASO_MS);
+        setTimeout(function () {
+            resaltar(document.querySelector('#' + secuenciaMaquina[i]));
+        }, RETRASO_MS);
     }
-    
-    
+
+
     console.log('el array con la secuencia maquina es ' + secuenciaMaquina);
     secuenciaUsuario = [];
     desbloquearCuadradoUsuario();
-    
+
 }
 
 
@@ -53,15 +53,15 @@ function juegaUsuario(e) {
     let cuadradoSeleccionUsuario = e.target;
     resaltar(cuadradoSeleccionUsuario);
     secuenciaUsuario.push(cuadradoSeleccionUsuario.attributes.id.value);
-   
+
     console.log('el arreglo con las selecciones del usuario ' + secuenciaUsuario);
-    bloquearCuadradoUsuario();
     
-    
-    if(secuenciaUsuario.length === secuenciaMaquina.length){
+
+
+    if (secuenciaUsuario.length === secuenciaMaquina.length) {
+        bloquearCuadradoUsuario();//para que no me ocurra lo que está sucediendo (que mientras la máquina juega el usuario puede seguir haciendo click debo usar un setTimeOut, ver luego)
         juegaMaquina();
-    }
-    else{
+    } else {
         desbloquearCuadradoUsuario();
     }
 }
@@ -76,8 +76,5 @@ function desbloquearCuadradoUsuario() {
     document.querySelectorAll('.cuadrado').forEach(function ($cuadro) {
         $cuadro.onclick = juegaUsuario;
     });
-    
+
 }
-
-
-
