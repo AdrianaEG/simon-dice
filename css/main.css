@@ -2,8 +2,6 @@
     display: flex;
     width: 500px;
     height: 300px;
-    border: solid;
-    border-color: red;
 }
 
 .cuadrado{
@@ -13,19 +11,23 @@
     margin: 10px;
 }
 
-#primero {
-    border-color: pink;
+#cuadrado-1 {
+    background-color: pink;
+    opacity: 0.5;
 }
 
-#segundo{
-    border-color: blue;
+#cuadrado-2{
+    background-color: blue;
+    opacity: 0.5;
 }
 
-#tercero{
-    border-color: green;
+#cuadrado-3{
+    background-color: green;
+    opacity: 0.5;
 }
 
-#cuarto{
-    border-color: yellow;
+#cuadrado-4{
+    background-color: yellow;
+    opacity: 0.5;
 }
 
