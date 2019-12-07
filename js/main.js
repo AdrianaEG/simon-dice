@@ -8,7 +8,7 @@ bloquearCuadradoUsuario();
 
 $botonComenzar.onclick = function (event) {
     ronda = 0;
-        
+
     secuenciaUsuario = [];
     secuenciaMaquina = [];
 
