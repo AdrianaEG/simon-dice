@@ -4,10 +4,8 @@
     height: 300px;
 }
 
-.cuadrado{
-    width: 200px;
+.cuadrado {
     height: 200px;
-    border: solid;
     margin: 10px;
 }
 
@@ -16,18 +14,17 @@
     opacity: 0.5;
 }
 
-#cuadrado-2{
+#cuadrado-2 {
     background-color: blue;
     opacity: 0.5;
 }
 
-#cuadrado-3{
+#cuadrado-3 {
     background-color: green;
     opacity: 0.5;
 }
 
-#cuadrado-4{
+#cuadrado-4 {
     background-color: yellow;
     opacity: 0.5;
 }
-
