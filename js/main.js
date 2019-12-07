@@ -2,11 +2,13 @@ const $botonComenzar = document.querySelector('#comenzar');
 let secuenciaUsuario = [];
 let secuenciaMaquina = [];
 let clicksUsuario = 0;
+let ronda = 0;
 
 bloquearCuadradoUsuario();
 
 $botonComenzar.onclick = function (event) {
-    let ronda = 0;
+    ronda = 0;
+        
     secuenciaUsuario = [];
     secuenciaMaquina = [];
 
@@ -17,6 +19,7 @@ $botonComenzar.onclick = function (event) {
 
 
 function juegaMaquina() {
+    document.querySelector('.estado').innerText = "TURNO DE LA MAQUINA";
     let aleatorio = obtenerNumeroAleatorio();
     let cuadradoResaltado = document.querySelector('#cuadrado-' + aleatorio);
     secuenciaMaquina.push(cuadradoResaltado.attributes.id.value);
@@ -39,6 +42,8 @@ function juegaMaquina() {
     }, retraso_turno_jugador);
 
     clicksUsuario = 0;
+    ronda++;
+    document.querySelector('.numero-ronda').innerText = "Vas por la ronda: " + ronda;
 }
 
 
@@ -56,7 +61,6 @@ function resaltar(cuadradoResaltado) {
 
 function juegaUsuario(e) {
     let cuadradoSeleccionUsuario = e.target;
-    resaltar(cuadradoSeleccionUsuario);
     secuenciaUsuario.push(cuadradoSeleccionUsuario.attributes.id.value);
 
     //console.log('el arreglo con las selecciones del usuario ' + secuenciaUsuario);
@@ -67,6 +71,7 @@ function juegaUsuario(e) {
         if (comprobarSiPerdio(clicksUsuario)) {
             perder();
         } else {
+            resaltar(cuadradoSeleccionUsuario);
             bloquearCuadradoUsuario();
             juegaMaquina();
         }
@@ -75,6 +80,7 @@ function juegaUsuario(e) {
         if (comprobarSiPerdio(clicksUsuario)) {
             perder();
         } else {
+            resaltar(cuadradoSeleccionUsuario);
             desbloquearCuadradoUsuario();
             clicksUsuario++;
         }
@@ -89,7 +95,7 @@ function comprobarSiPerdio(clicksUsuario) {
 }
 
 function perder() {
-    alert('PERDISTE PRESIONA COMENZAR PARA EMPEZAR DE NUEVO');
+    document.querySelector('.estado').innerText = 'PERDISTE, haz click en comenzar para jugar nuevamente';
     bloquearCuadradoUsuario();
 }
 
@@ -100,6 +106,7 @@ function bloquearCuadradoUsuario() {
 }
 
 function desbloquearCuadradoUsuario() {
+    document.querySelector('.estado').innerText = "ES TU TURNO";
     document.querySelectorAll('.cuadrado').forEach(function ($cuadro) {
         $cuadro.onclick = juegaUsuario;
     });
