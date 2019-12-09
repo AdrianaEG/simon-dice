@@ -32,7 +32,6 @@ function juegaMaquina() {
     }
 
 
-    //console.log('el array con la secuencia maquina es ' + secuenciaMaquina);
     secuenciaUsuario = [];
 
     let retraso_turno_jugador = (secuenciaMaquina.length + 1) * 1000;
